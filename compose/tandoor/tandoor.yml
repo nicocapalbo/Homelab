@@ -1,0 +1,45 @@
+services:
+  db_recipes:
+    container_name: tandoor_db
+    restart: always
+    image: postgres:16-alpine
+    volumes:
+      - $APPDIR/tandoor/postgresql:/var/lib/postgresql/data
+    env_file:
+      - ./.env
+
+  web_recipes:
+    container_name: tandoor
+    restart: always
+    image: vabene1111/recipes
+    env_file:
+      - ./.env
+    ports:
+      - 8012:8080
+    volumes:
+      - $APPDIR/tandoor/staticfiles:/opt/recipes/staticfiles
+      # Do not make this a bind mount, see https://docs.tandoor.dev/install/docker/#volumes-vs-bind-mounts
+      - $APPDIR/tandoor/nginx_config:/opt/recipes/nginx/conf.d
+      - $APPDIR/tandoor/mediafiles:/opt/recipes/mediafiles
+    depends_on:
+      - db_recipes
+
+  nginx_recipes:
+    container_name: tandoor_nginx
+    image: nginx:mainline-alpine
+    restart: always
+    ports:
+      - 8011:80
+    env_file:
+      - ./.env
+    depends_on:
+      - web_recipes
+    volumes:
+      # Do not make this a bind mount, see https://docs.tandoor.dev/install/docker/#volumes-vs-bind-mounts
+      - $APPDIR/tandoor/nginx_config:/etc/nginx/conf.d:ro
+      - $APPDIR/tandoor/staticfiles:/static:ro
+      - $APPDIR/tandoor/mediafiles:/media:ro
+
+volumes:
+  nginx_config:
+  staticfiles:

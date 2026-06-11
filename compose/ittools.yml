@@ -1,0 +1,10 @@
+services:
+  ittools:
+    container_name: ittools
+    image: ghcr.io/sharevb/it-tools:nightly
+    #pull_policy: always
+    restart: unless-stopped
+    ports:
+      - 3041:8080
+    volumes:
+      - $APPDIR/ittools/config/tools-filter.json:/usr/share/nginx/html/tools-filter.json:ro

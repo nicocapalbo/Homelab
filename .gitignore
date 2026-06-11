@@ -1,0 +1,12 @@
+.env
+.env.local
+appdata/
+backups/
+logs/
+scripts/
+shared/
+secrets/
+*.db
+*.sqlite
+.DS_Store
+*~

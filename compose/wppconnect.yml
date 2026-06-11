@@ -1,0 +1,15 @@
+services:
+  wppconnect:
+    image: unilogica/wppconnect-server:2.4.0
+    container_name: wppconnect
+    networks:
+      - default
+    restart: unless-stopped
+    ports:
+      - "21465:21465"
+    environment:
+      - SERVER_PORT=21465
+      - SECRET_KEY=mysecrettoken
+      - CHROME_ARGS=--no-sandbox,--disable-dev-shm-usage
+    volumes:
+      - ./wpp-data:/usr/src/app/wpp-data

@@ -1,0 +1,42 @@
+######## NETWORKS ########
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
+include:
+  ######## SERVICES ########
+  # CORE
+  - compose/cloudflare-ddns.yml
+  - compose/portainer.yml
+  - compose/nginx.yml
+  - compose/homepage.yml
+  - compose/dozzle.yml
+  - compose/pihole.yml
+  # BACKUPS
+  - compose/duplicati.yml
+  # MEDIA
+  # - compose/DMB.yml
+  # - compose/plex.yml
+  # - compose/overseerr.yml
+  # STATS
+  - compose/tautulli.yml
+  # TOOLS
+  - compose/firefly/firefly.yml
+  - compose/actualbudget.yml
+  - compose/homeassistant.yml
+  # - compose/calcom/calcom.yml
+  - compose/paperlessngx/paperlessngx.yml
+  - compose/speedtesttracker.yml
+  - compose/ittools.yml
+  # - compose/clementines.yml
+  - compose/diun.yml
+  # - compose/tandoor/tandoor.yml
+  - compose/uptime-kuma.yml
+  - compose/netdata.yml
+  - compose/beszel.yml
+  #DEV
+  # - compose/DMBDev.yml
+  # - compose/wppconnect.yml
+  # - compose/dumb.yml

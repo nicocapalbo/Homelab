@@ -1,0 +1,27 @@
+services:
+  diun:
+    image: crazymax/diun:latest
+    container_name: diun
+    restart: unless-stopped
+    volumes:
+      - $APPDIR/diun/data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TZ=$TZ
+      - LOG_LEVEL=info
+      - LOG_JSON=false
+      - DIUN_WATCH=true
+      - DIUN_WATCH_SCHEDULE=0 */6 * * *
+      - DIUN_PROVIDERS_DOCKER=true
+      - DIUN_PROVIDERS_DOCKER_WATCHBYDEFAULT=true
+      - DIUN_NOTIF_DISCORD_WEBHOOKURL=https://discord.com/api/webhooks/1369328384110235821/OEtsDed3rZWF6W9m3ASDjxkuDCccDACGwtJ0SP3OXV8okoeZNq1i4Wawe6aeoW3_TWsI
+      - DIUN_NOTIF_DISCORD_MENTIONS=@here
+      - DIUN_NOTIF_DISCORD_RENDERFIELDS=true
+      - DIUN_NOTIF_DISCORD_TIMEOUT=10s
+      # - DIUN_NOTIF_DISCORD_TEMPLATEBODY=Docker tag {{ if .Entry.Image.HubLink }}[**{{ .Entry.Image }}**]({{ .Entry.Image.HubLink }}){{ else }}**{{ .Entry.Image }}**{{ end }} which you subscribed to through {{ .Entry.Provider }} provider {{ if (eq .Entry.Status "new") }}is available{{ else }}has been updated{{ end }} on {{ .Entry.Image.Domain }} registry (triggered by {{ .Meta.Hostname }} host).
+      - DIUN_NOTIF_DISCORD_TEMPLATEBODY="Docker image {{ .Entry.Image.Path }} has an update available."
+    labels:
+      - "homepage.services.diun.name=Diun"
+      - "homepage.services.diun.icon=diun"
+      - "homepage.services.diun.url=http://miniserver:8082" # Change to your Diun web UI port if available
+      - "homepage.services.diun.description=Docker Image Update Notifier"

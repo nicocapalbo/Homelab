@@ -1,0 +1,32 @@
+services:
+  # Homepage - Application Dashboard
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    networks:
+      - default
+    ports:
+      - "3000:3000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - $APPDIR/homepage:/app/config
+    environment:
+      TZ: $TZ
+      PUID: $PUID
+      PGID: $PGID
+      HOMEPAGE_ALLOWED_HOSTS: 
+      HOMEPAGE_VAR_PLEX_KEY: $PLEX_KEY
+      HOMEPAGE_VAR_TAUTULLI_KEY: $TAUTULLI_KEY
+      HOMEPAGE_VAR_PORTAINER_KEY: $PORTAINER_KEY
+      HOMEPAGE_VAR_NGINX_PASSWORD: $NGINX_PASSWORD
+      HOMEPAGE_VAR_OVERSEERR_API: $OVERSEERR_API
+      HOMEPAGE_VAR_HOMEASSISTANT_TOKEN: $HOMEASSISTANT_TOKEN
+      HOMEPAGE_VAR_PAPERLESSNGX_TOKEN: $PAPERLESSNGX_TOKEN
+      HOMEPAGE_VAR_RIVEN_API_KEY: $RIVEN_API_KEY
+      HOMEPAGE_VAR_RD_API_KEY: $RD_API_KEY
+      HOMEPAGE_VAR_SPEEDTESTTRACKER_API: $SPEEDTESTTRACKER_API
+      HOMEPAGE_VAR_PIHOLE_PASSWORD: $PIHOLE_PASSWORD
+      HOMEPAGE_VAR_BESZEL_SUPERUSER_PASSWORD: $BESZEL_SUPERUSER_PASSWORD

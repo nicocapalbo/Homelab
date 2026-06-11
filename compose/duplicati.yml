@@ -1,0 +1,19 @@
+services:
+  duplicati:
+    image: lscr.io/linuxserver/duplicati:latest
+    container_name: duplicati
+    networks:
+      - default
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=$TZ
+      # - CLI_ARGS= #optional
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - $APPDIR/duplicati:/config
+      - $DOCKERDIR/backups:/backups
+      - $APPDIR:/source
+    ports:
+      - 8200:8200
+    restart: unless-stopped

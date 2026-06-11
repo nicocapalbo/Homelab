@@ -1,0 +1,25 @@
+services:
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: linuxplex
+    network_mode: host
+    restart: unless-stopped
+    devices:
+      - /dev/dri:/dev/dri # for hardware transcoding
+    volumes:
+      - $APPDIR/plex:/config
+      #- $DATADIR/data/media:/data/media1 # Media Folder 1
+      #- $DATADIR/data2/media:/data/media2 # Media Folder 2
+      - /dev/shm:/data/transcode # Offload transcoding to RAM if you have enough RAM
+      - realdebrid:/torrents
+      - /media/movies:/media/movie:ro
+    environment:
+      TZ: $TZ
+      HOSTNAME: "myPlex"
+      #PLEX_CLAIM_FILE: claim-2fka1LNmfSczKR6N5DcG # Not required initially
+      PLEX_UID: $PUID
+      PLEX_GID: $PGID
+      VERSION: "docker"
+volumes:
+    realdebrid:
+        external: true

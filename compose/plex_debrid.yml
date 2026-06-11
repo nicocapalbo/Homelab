@@ -1,0 +1,15 @@
+services:
+  plex_debrid:
+    image: itstoggle/plex_debrid
+    container_name: plex_debrid  # Optional: set a specific container name
+    restart: unless-stopped
+    #network_mode: "host"
+    networks:
+      - default
+    volumes:
+      - $APPDIR/plex_debrid:/config
+    tty: true  # Equivalent to -t
+    stdin_open: true  # Equivalent to -i
+    depends_on:  # Used to delay the startup of plex to ensure the rclone mount is available.
+      plex: # set to the name of the container running rclone
+        condition: service_healthy 

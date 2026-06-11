@@ -1,0 +1,27 @@
+services:
+  plex:
+    image: plexinc/pms-docker:latest
+    container_name: plex
+    network_mode: "host"
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    devices:
+      - /dev/dri:/dev/dri # for hardware transcoding
+    volumes:
+      - $APPDIR/plex/library:/config
+      - $APPDIR/plex/transcode:/transcode
+      - $APPDIR/DMB/Zurg/mnt:/data # rclone mount location from DMB must be shared to Plex container. Don't add to plex library
+      - $APPDIR/DMB/Riven/mnt:/mnt  # Riven symlink location from DMB must be shared to Plex container. Add to plex library    
+    environment:
+      TZ: $TZ
+      HOSTNAME: "myPlex"
+      PLEX_CLAIM: ${PLEX_CLAIM}
+      PLEX_UID: $PUID
+      PLEX_GID: $PGID
+      ADVERTISE_IP: "http://$SERVER_IP:32400/"
+      ALLOWED_NETWORKS: $LOCAL_IPS
+    depends_on:                                            ## Used to delay the startup of plex to ensure the rclone mount is available.
+      DMB:                                                 ## set to the name of the container running rclone
+        condition: service_healthy
+        restart: true                                       ## Will automatically restart the plex container if the DMB container restarts
