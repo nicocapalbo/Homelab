@@ -1,5 +1,6 @@
 .env
 .env.local
+compose/firefly/.db.env
 appdata/
 backups/
 logs/

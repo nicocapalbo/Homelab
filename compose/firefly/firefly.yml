@@ -21,7 +21,11 @@ services:
     hostname: db
     container_name: firefly_iii_db
     restart: always
-    env_file: .db.env
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
     networks:
       - firefly_iii
     volumes:
