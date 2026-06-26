@@ -14,14 +14,18 @@ include:
   - compose/homepage.yml
   - compose/dozzle.yml
   - compose/pihole.yml
+
   # BACKUPS
   - compose/duplicati.yml
+
   # MEDIA
   # - compose/DMB.yml
   # - compose/plex.yml
   # - compose/overseerr.yml
-  # STATS
-  - compose/tautulli.yml
+
+  # MEDIA STATS
+  # - compose/tautulli.yml
+
   # TOOLS
   - compose/firefly/firefly.yml
   - compose/actualbudget.yml
@@ -36,6 +40,7 @@ include:
   - compose/uptime-kuma.yml
   - compose/netdata.yml
   - compose/beszel.yml
+  
   #DEV
   # - compose/DMBDev.yml
   # - compose/wppconnect.yml
