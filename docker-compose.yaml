@@ -1,10 +1,42 @@
 ######## NETWORKS ########
 networks:
   default:
+    name: main
     driver: bridge
     ipam:
       config:
         - subnet: 172.18.0.0/16
+  ingress:
+    name: ingress
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+  apps:
+    name: apps
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.1.0/24
+  admin:
+    name: admin
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.2.0/24
+  monitoring:
+    name: monitoring
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.3.0/24
+  internal-db:
+    name: internal-db
+    driver: bridge
+    internal: true
+    ipam:
+      config:
+        - subnet: 172.20.4.0/24
 include:
   ######## SERVICES ########
   # CORE
@@ -19,7 +51,7 @@ include:
   - compose/duplicati.yml
 
   # MEDIA
-  - compose/DUMB.yml
+  # - compose/DUMB.yml
   # - compose/DMB.yml
   # - compose/plex.yml
   # - compose/overseerr.yml

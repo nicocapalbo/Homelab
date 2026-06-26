@@ -4,6 +4,8 @@ services:
     image: ghcr.io/sharevb/it-tools:nightly
     #pull_policy: always
     restart: unless-stopped
+    networks:
+      - apps
     ports:
       - 3041:8080
     volumes:

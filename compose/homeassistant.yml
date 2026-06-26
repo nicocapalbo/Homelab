@@ -9,7 +9,7 @@ services:
     restart: unless-stopped
     privileged: true
     networks:
-      - default
+      - apps
     devices:
       - /dev/ttyUSB0:/dev/ttyUSB0
     ports:

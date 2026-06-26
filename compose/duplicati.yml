@@ -3,7 +3,7 @@ services:
     image: lscr.io/linuxserver/duplicati:latest
     container_name: duplicati
     networks:
-      - default
+      - admin
     environment:
       - PUID=0
       - PGID=0

@@ -4,8 +4,10 @@ services:
     container_name: nginx-proxy-manager
     restart: unless-stopped
     networks:
-      - default
-      #- calcom
+      - ingress
+      - apps
+      - admin
+      - monitoring
     #environment:
     #  - PUID=$PUID
     #  - PGID=$PGID

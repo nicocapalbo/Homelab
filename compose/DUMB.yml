@@ -7,7 +7,7 @@ services:
     stdin_open: true                                                  ## docker run -i
     tty: true     
     networks:
-      - default                                                    ## docker run -t
+      - default
     volumes:
       - ${APPDIR}/DUMB/config:/config                     ## Location of configuration files.
       - ${APPDIR}/DUMB/log:/log                           ## Location for logs

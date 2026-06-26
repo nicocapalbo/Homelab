@@ -7,7 +7,7 @@ services:
       - no-new-privileges:true
     restart: unless-stopped
     networks:
-      - default
+      - apps
     ports:
       - "3000:3000"
     volumes:
@@ -18,6 +18,9 @@ services:
       PUID: $PUID
       PGID: $PGID
       HOMEPAGE_ALLOWED_HOSTS: $HOMEPAGE_ALLOWED_HOSTS
+      HOMEPAGE_VAR_SERVER_IP: $SERVER_IP
+      HOMEPAGE_VAR_NPM_USERNAME: $NPM_USERNAME
+      HOMEPAGE_VAR_BESZEL_USERNAME: $BESZEL_USERNAME
       HOMEPAGE_VAR_PLEX_KEY: $PLEX_KEY
       HOMEPAGE_VAR_TAUTULLI_KEY: $TAUTULLI_KEY
       HOMEPAGE_VAR_PORTAINER_KEY: $PORTAINER_KEY
