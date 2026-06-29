@@ -41,6 +41,7 @@ include:
   ######## SERVICES ########
   # CORE
   - compose/cloudflare-ddns.yml
+  - compose/cloudflared.yml
   - compose/portainer.yml
   - compose/nginx.yml
   - compose/homepage.yml
