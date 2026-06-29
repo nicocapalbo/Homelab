@@ -4,6 +4,7 @@ services:
     image: pihole/pihole:latest
     networks:
       - default
+      - apps
     ports:
       - "53:53/tcp"
       - "53:53/udp"

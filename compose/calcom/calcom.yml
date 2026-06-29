@@ -7,6 +7,8 @@ networks:
     ipam:
       config:
         - subnet: 172.21.0.0/16
+  apps:
+    external: true
 
 services:
   database:
@@ -18,6 +20,7 @@ services:
     env_file: .env
     networks:
       - calcom
+      - apps
 
   calcom:
     container_name: calcom
@@ -38,7 +41,8 @@ services:
     restart: always
     networks:
       calcom:
-        ipv4_address: 172.21.0.4  # Specify the static IP address here
+        ipv4_address: 172.21.0.4
+      apps: {}  # Specify the static IP address here
     ports:
       - 3444:3000
     env_file: .env

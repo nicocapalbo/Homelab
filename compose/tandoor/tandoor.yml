@@ -3,6 +3,9 @@ services:
     container_name: tandoor_db
     restart: always
     image: postgres:16-alpine
+    networks:
+      - default
+      - apps
     volumes:
       - $APPDIR/tandoor/postgresql:/var/lib/postgresql/data
     env_file:
@@ -12,6 +15,9 @@ services:
     container_name: tandoor
     restart: always
     image: vabene1111/recipes
+    networks:
+      - default
+      - apps
     env_file:
       - ./.env
     ports:
@@ -28,6 +34,9 @@ services:
     container_name: tandoor_nginx
     image: nginx:mainline-alpine
     restart: always
+    networks:
+      - default
+      - apps
     ports:
       - 8011:80
     env_file:

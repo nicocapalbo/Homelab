@@ -5,6 +5,7 @@ services:
     restart: unless-stopped
     networks:
       - monitoring
+      - apps
     ports:
       - 8090:8090
     volumes:

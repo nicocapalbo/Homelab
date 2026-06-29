@@ -4,6 +4,7 @@ services:
     container_name: duplicati
     networks:
       - admin
+      - apps
     environment:
       - PUID=0
       - PGID=0

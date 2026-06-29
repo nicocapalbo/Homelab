@@ -8,6 +8,7 @@ services:
     tty: true
     networks:
       - default
+      - apps
     volumes:
       - $APPDIR/DMB/config:/config                     ## Location of configuration files. If a Zurg config.yml and/or Zurg app is placed here, it will be used to override the default configuration and/or app used at startup.
       - $APPDIR/DMB/log:/log                           ## Location for logs
