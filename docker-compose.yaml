@@ -52,7 +52,7 @@ include:
   - compose/duplicati.yml
 
   # MEDIA
-  # - compose/DUMB.yml
+  - compose/DUMB.yml
   # - compose/DMB.yml
   # - compose/plex.yml
   # - compose/overseerr.yml

@@ -7,50 +7,50 @@ services:
     stdin_open: true                                                  ## docker run -i
     tty: true     
     networks:
-      - default
+      #- default
       - apps
     volumes:
-      - ${APPDIR}/DUMB/config:/config                     ## Location of configuration files.
-      - ${APPDIR}/DUMB/log:/log                           ## Location for logs
-      - ${APPDIR}/DUMB/data:/data                         ## Location for all service data
-      - ${APPDIR}/DUMB/mnt/debrid:/mnt/debrid             ## Location for all symlinks and rclone mounts - change to /mnt/debrid:rshared if using decypharr 
+      - $APPDIR/DUMB/config:/config                     ## Location of configuration files.
+      - $APPDIR/DUMB/log:/log                           ## Location for logs
+      - $APPDIR/DUMB/data:/data                         ## Location for all service data
+      - $APPDIR/DUMB/mnt/debrid:/mnt/debrid             ## Location for all symlinks and rclone mounts - change to /mnt/debrid:rshared if using decypharr 
     environment:
-      - TZ=${TZ}
+      - TZ=$TZ
       - PUID=$PUID
       - PGID=$PGID
     # network_mode: container:gluetun                                ## Example to attach to gluetun vpn container if realdebrid blocks IP address
     ports:
-      - "44551:5000"	"TCP	CLI Debrid - Web UI accessible at the assigned port"
-      - "44552:5001"	"TCP	CLI Battery - The API is accessible at the assigned port"
-      - "44553:8000"	"TCP	DUMB API - The API is accessible at the assigned port"
-      - "44554:3005"	"TCP	DUMB frontend - Web UI accessible at the assigned port"
-      - "44555:8282"	"TCP	Decypharr - Web UI accessible at the assigned port"
-      - "44556:8096"	"TCP	Emby Media Server - Web UI accessible at the assigned port (default HTTP)"
-      - "44557:8096"	"TCP	Jellyfin Media Server - Web UI accessible at the assigned port (default HTTP)"
-      - "44558:8686"	"TCP	Lidarr - Web UI accessible at the assigned port"
-      - "44559:8088"	"TCP	AltMount - Web UI/API accessible at the assigned port"
-      - "44560:3000"	"TCP	NzbDAV frontend - Web UI accessible at the assigned port"
-      - "44561:3003"	"TCP	Pulsarr - Web UI accessible at the assigned port"
-      - "44562:3004"	"TCP	Traefik Proxy Admin - Web UI/API accessible at the assigned port"
-      - "44563:18080"	"TCP	Traefik - Reverse proxy entrypoint for embedded UIs and TPA-managed routes"
-      - "44564:18081"	"TCP	Traefik - Dashboard/API used by Traefik Proxy Admin diagnostics"
-      - "44565:8080"	"TCP	NzbDAV backend - The API is accessible at the assigned port"
-      - "44566:5050"	"TCP	pgAdmin 4 - Web UI accessible at the assigned port"
-      - "44567:5055"	"TCP	Seerr - Web UI accessible at the assigned port"
-      - "44568:8888"	"TCP	Phalanx DB - The API is accessible at the assigned port"
-      - "44570:5432"	"TCP	PostgreSQL - The SQL server is accessible at the assigned port"
-      - "44571:9696"	"TCP	Prowlarr - Web UI accessible at the assigned port"
-      - "44572:9705"	"TCP	NeutArr - Web UI accessible at the assigned port"
-      - "44573:7878"	"TCP	Radarr - Web UI accessible at the assigned port"
-      - "44574:3000"	"TCP	Riven frontend - Web UI accessible at the assigned port"
-      - "44575:8080"	"TCP	Riven backend - The API is accessible at the assigned port"
-      - "44576:8989"	"TCP	Sonarr - Web UI accessible at the assigned port"
-      - "44577:8181"	"TCP	Tautulli - Web UI accessible at the assigned port"
-      - "44578:6868"	"TCP	Profilarr - Web UI accessible at the assigned port"
-      - "44579:6969"	"TCP	Whisparr - Web UI accessible at the assigned port"
-      - "44580:8182"	"TCP	Zilean - The API and Web UI (/swagger/index.html) is accessible at the assigned port"
-      - "44581:9090"	"TCP	Zurg - Web UI accessible at the assigned port"
-      - "32400:32400"	"TCP	Plex Media Server - Web UI accessible at the assigned port"
+      - "44551:5000"	# "TCP	CLI Debrid - Web UI accessible at the assigned port"
+      - "44552:5001"	# "TCP	CLI Battery - The API is accessible at the assigned port"
+      - "44553:8000"	# "TCP	DUMB API - The API is accessible at the assigned port"
+      - "44554:3005"	# "TCP	DUMB frontend - Web UI accessible at the assigned port"
+      - "44555:8282"	# "TCP	Decypharr - Web UI accessible at the assigned port"
+      - "44556:8096"	# "TCP	Emby Media Server - Web UI accessible at the assigned port (default HTTP)"
+      - "44557:8096"	# "TCP	Jellyfin Media Server - Web UI accessible at the assigned port (default HTTP)"
+      - "44558:8686"	# "TCP	Lidarr - Web UI accessible at the assigned port"
+      - "44559:8088"	# "TCP	AltMount - Web UI/API accessible at the assigned port"
+      - "44560:3000"	# "TCP	NzbDAV frontend - Web UI accessible at the assigned port"
+      - "44561:3003"	# "TCP	Pulsarr - Web UI accessible at the assigned port"
+      - "44562:3004"	# "TCP	Traefik Proxy Admin - Web UI/API accessible at the assigned port"
+      - "44563:18080"	# "TCP	Traefik - Reverse proxy entrypoint for embedded UIs and TPA-managed routes"
+      - "44564:18081"	# "TCP	Traefik - Dashboard/API used by Traefik Proxy Admin diagnostics"
+      - "44565:8080"	# "TCP	NzbDAV backend - The API is accessible at the assigned port"
+      - "44566:5050"	# "TCP	pgAdmin 4 - Web UI accessible at the assigned port"
+      - "44567:5055"	# "TCP	Seerr - Web UI accessible at the assigned port"
+      - "44568:8888"	# "TCP	Phalanx DB - The API is accessible at the assigned port"
+      - "44570:5432"	# "TCP	PostgreSQL - The SQL server is accessible at the assigned port"
+      - "44571:9696"	# "TCP	Prowlarr - Web UI accessible at the assigned port"
+      - "44572:9705"	# "TCP	NeutArr - Web UI accessible at the assigned port"
+      - "44573:7878"	# "TCP	Radarr - Web UI accessible at the assigned port"
+      - "44574:3000"	# "TCP	Riven frontend - Web UI accessible at the assigned port"
+      - "44575:8080"	# "TCP	Riven backend - The API is accessible at the assigned port"
+      - "44576:8989"	# "TCP	Sonarr - Web UI accessible at the assigned port"
+      - "44577:8181"	# "TCP	Tautulli - Web UI accessible at the assigned port"
+      - "44578:6868"	# "TCP	Profilarr - Web UI accessible at the assigned port"
+      - "44579:6969"	# "TCP	Whisparr - Web UI accessible at the assigned port"
+      - "44580:8182"	# "TCP	Zilean - The API and Web UI (/swagger/index.html) is accessible at the assigned port"
+      - "44581:9090"	# "TCP	Zurg - Web UI accessible at the assigned port"
+      - "32400:32400"	# "TCP	Plex Media Server - Web UI accessible at the assigned port"
     devices:
       - /dev/fuse:/dev/fuse:rwm
       - /dev/dri:/dev/dri       
