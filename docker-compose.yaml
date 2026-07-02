@@ -40,7 +40,7 @@ networks:
 include:
   ######## SERVICES ########
   # CORE
-  - compose/cloudflare-ddns.yml
+  # - compose/cloudflare-ddns.yml
   - compose/cloudflared.yml
   - compose/portainer.yml
   - compose/nginx.yml
@@ -59,6 +59,9 @@ include:
 
   # MEDIA STATS
   # - compose/tautulli.yml
+
+  # MEDIA REQUESTS
+  - compose/wizarr.yml
 
   # TOOLS
   - compose/firefly/firefly.yml
