@@ -17,11 +17,5 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro # # Use Docker Socket Proxy instead for improved security
       - $APPDIR/portainer/data:/data # Change to local directory if you want to save/transfer config locally
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:9000"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 30s
     environment:
       - TZ=$TZ
