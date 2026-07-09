@@ -7,6 +7,6 @@ services:
       - monitoring
       - apps
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     ports:
       - 8080:8080
