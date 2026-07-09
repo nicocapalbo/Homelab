@@ -8,12 +8,18 @@ services:
         ports:
             - 8085:80
             - 8443:443
+        healthcheck:
+          test: ["CMD", "wget", "-qO-", "http://localhost:80"]
+          interval: 30s
+          timeout: 10s
+          retries: 3
+          start_period: 30s
         environment:
             - PUID=$PUID
             - PGID=$PGID
             - APP_KEY=$SPEEDTESTTRACKER_KEY
             - APP_TIMEZONE=$TZ
-            - APP_DEBUG=true
+            - APP_DEBUG=false
             - DB_CONNECTION=sqlite
             - SPEEDTEST_SCHEDULE=0 */2 * * *
         volumes:
