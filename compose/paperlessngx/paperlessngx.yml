@@ -47,7 +47,7 @@ services:
     environment:
       POSTGRES_DB: paperless
       POSTGRES_USER: paperless
-      POSTGRES_PASSWORD: paperless
+      POSTGRES_PASSWORD: $PAPERLESS_DB_PASSWORD
 
   paperless-ngx:
     container_name: paperless-ngx

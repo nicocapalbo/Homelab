@@ -25,5 +25,5 @@ services:
     environment:
       LISTEN: 45876
       KEY: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN9Q6wwmqgS0Kcymz7BGQmWkz3ktYgt4von7650Je3zQ'
-      TOKEN: 15d-151ad01127d-61c-7682d2bb434
+      TOKEN: $BESZEL_AGENT_TOKEN
       HUB_URL: http://127.0.0.1:8090
