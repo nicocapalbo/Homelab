@@ -53,6 +53,7 @@ services:
       # - "44580:8182"	# "TCP	Zilean - The API and Web UI (/swagger/index.html) is accessible at the assigned port"
       # - "44581:9090"	# "TCP	Zurg - Web UI accessible at the assigned port"
       - "32400:32400"	# "TCP	Plex Media Server - Web UI accessible at the assigned port"
+      - "44582:6246"	# "TCP	Maintainerr - Web UI accessible at the assigned port"
     devices:
       - /dev/fuse:/dev/fuse:rwm
       - /dev/dri:/dev/dri       
