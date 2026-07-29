@@ -51,10 +51,3 @@ docker compose down
 - Backups: `backups/`
 - Environment: `.env` (gitignored) — copy from `.env.example`
 
-## Access
-
-- **Local:** `http://miniserver:<port>` or `http://192.168.1.167:<port>`
-- **Remote:** Cloudflare tunnel + domains (`*.nicoshomelab.com`)
-- **VPN:** Tailscale (`100.76.166.26`)
-- **DNS:** Pi-hole at `192.168.1.167` — local records (`*.home`) resolve inside the LAN
-- **Dashboard:** Homepage at `http://miniserver:3000`
