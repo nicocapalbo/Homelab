@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Guard: prevent recursive loop (sync-private.sh pushes, triggering this hook)
+if [ "${HOOK_SYNCING:-0}" = "1" ]; then
+  exit 0
+fi
+
+# Only check if pushing to origin/master
+readonly REMOTE="origin"
+readonly BRANCH="master"
+if [ "$1" = "$REMOTE" ] && [ "$2" = "refs/heads/$BRANCH" ]; then
+  # Check if .env or appdata/ changed since last commit
+  if ! git diff --quiet -- .env appdata/ 2>/dev/null; then
+    echo ""
+    echo "============================================"
+    echo " Unsynced config changes detected!"
+    echo " Running sync-private.sh..."
+    echo "============================================"
+    HOOK_SYNCING=1 bash "$(git rev-parse --show-toplevel)/sync-private.sh"
+  fi
+fi

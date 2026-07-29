@@ -77,7 +77,10 @@ This copies `.env` and all config files from `appdata/` into `../Homelab-private
 git clone <repo-url>
 cd homelab
 
-# 2. Copy and configure environment
+# 2. Enable the pre-push hook (auto-syncs private config before every push)
+git config core.hooksPath .githooks
+
+# 3. Copy and configure environment
 cp .env.example .env
 # Edit .env with your API keys, tokens, and preferences
 
