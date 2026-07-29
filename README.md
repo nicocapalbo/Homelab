@@ -25,27 +25,51 @@ Services are segmented by network — a compromised web app on `apps` cannot rea
 **Monitoring:** uptime-kuma, beszel, netdata, dozzle, diun
 **Media (disabled):** DUMB, plex, overseerr, tautulli
 
-Secrets and service configs are stored in a [private config overlay](https://github.com/nicocapalbo/Homelab-private) repo.
+## Getting started
 
-### Restore from scratch
+Secrets and service configs are stored in a [private config overlay repo](https://github.com/nicocapalbo/Homelab-private). Two setup paths are available:
+
+- **With access to the private repo** — full restore, one command
+- **Without access** — manual cold start from `.env.example`
+
+### With private repo access (restore from scratch)
 
 ```bash
+# 1. Clone the public repo and enable auto-sync hooks
 git clone git@github.com:nicocapalbo/Homelab.git
 cd Homelab
+git config core.hooksPath .githooks
+
+# 2. Restore: clones private repo, copies .env, syncs configs, starts everything
 bash restore.sh
 ```
 
-This clones the private config overlay, copies `.env`, syncs `appdata/` configs, and automatically starts the stack.
+### Without private repo access (cold start)
 
-### Sync config changes back
+```bash
+# 1. Clone the public repo
+git clone git@github.com:nicocapalbo/Homelab.git
+cd Homelab
 
-After configuring services through their UIs, save the state to the private repo:
+# 2. Create and configure environment
+cp .env.example .env
+# Edit .env with your API keys, tokens, and preferences
+
+# 3. Start everything
+docker compose up -d
+```
+
+## Syncing config changes
+
+After making changes through a service's UI, save them permanently:
 
 ```bash
 bash sync-private.sh
 ```
 
 This copies `.env` and all config files from `appdata/` into `../Homelab-private/`, commits, and pushes.
+
+The pre-push hook also runs this automatically whenever you `git push` with unsaved changes.
 
 ## Folder structure
 
@@ -65,30 +89,11 @@ This copies `.env` and all config files from `appdata/` into `../Homelab-private
 ├── backups/              # Local backups (gitignored)
 ├── docker-compose.yaml   # Entry point — includes all service files
 ├── .env                  # Environment variables (gitignored)
-├── restore.sh             # Bootstrap stack from private config overlay
-├── sync-private.sh        # Sync configs back to private repo
+├── .env.example          # Template for .env
+├── restore.sh            # Bootstrap stack from private config overlay
+├── sync-private.sh       # Sync configs back to private repo
+├── AGENTS.md             # Instructions for AI coding agents
 └── README.md
-```
-
-## Setup
-
-```bash
-# 1. Clone the repo
-git clone <repo-url>
-cd homelab
-
-# 2. Enable the pre-push hook (auto-syncs private config before every push)
-git config core.hooksPath .githooks
-
-# 3. Copy and configure environment
-cp .env.example .env
-# Edit .env with your API keys, tokens, and preferences
-
-# 3. Start everything
-docker compose up -d
-
-# 4. Check that services are running
-docker compose ps
 ```
 
 ## Managing services
