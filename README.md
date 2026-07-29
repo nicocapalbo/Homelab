@@ -25,6 +25,27 @@ Services are segmented by network — a compromised web app on `apps` cannot rea
 **Monitoring:** uptime-kuma, beszel, netdata, dozzle, diun
 **Media (disabled):** DUMB, plex, overseerr, tautulli
 
+Secrets and service configs are stored in a [private config overlay](https://github.com/nicocapalbo/Homelab-private) repo.
+
+### Restore from scratch
+
+```bash
+git clone git@github.com:nicocapalbo/Homelab.git
+cd Homelab
+bash restore.sh
+docker compose up -d
+```
+
+### Sync config changes back
+
+After configuring services through their UIs, save the state to the private repo:
+
+```bash
+bash sync-private.sh
+```
+
+This copies `.env` and all config files from `appdata/` into `../Homelab-private/`, commits, and pushes.
+
 ## Folder structure
 
 ```
@@ -43,7 +64,8 @@ Services are segmented by network — a compromised web app on `apps` cannot rea
 ├── backups/              # Local backups (gitignored)
 ├── docker-compose.yaml   # Entry point — includes all service files
 ├── .env                  # Environment variables (gitignored)
-├── .env.example          # Template for .env
+├── restore.sh             # Bootstrap stack from private config overlay
+├── sync-private.sh        # Sync configs back to private repo
 └── README.md
 ```
 
