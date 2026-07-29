@@ -29,4 +29,9 @@ rsync -a --info=progress2 \
 
 echo ""
 echo "Restore complete!"
-echo "Run 'docker compose up -d' to start the stack."
+
+read -r -p "Start the stack now? [Y/n] " reply
+case "$reply" in
+  [nN]|[nN][oO]) echo "Run 'docker compose up -d' later to start." ;;
+  *) echo "Starting stack..." && docker compose up -d ;;
+esac
