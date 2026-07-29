@@ -7,13 +7,14 @@ services:
     stdin_open: true                                                  ## docker run -i
     tty: true     
     networks:
-      #- default
-      - apps
+      apps:
+        ipv4_address: 172.20.1.7
     volumes:
       - $APPDIR/DUMB/config:/config                     ## Location of configuration files.
       - $APPDIR/DUMB/log:/log                           ## Location for logs
       - $APPDIR/DUMB/data:/data                         ## Location for all service data
-      - $APPDIR/DUMB/mnt/debrid:/mnt/debrid             ## Location for all symlinks and rclone mounts - change to /mnt/debrid:rshared if using decypharr 
+      - $APPDIR/DUMB/mnt/debrid:/mnt/debrid             ## Location for all symlinks and rclone mounts - change to /mnt/debrid:rshared if using decypharr
+      - $APPDIR/DUMB/plex/transcode:/transcode           ## Location for Plex transcode - needed for hardware transcoding 
     environment:
       - TZ=$TZ
       - PUID=$PUID
@@ -56,9 +57,13 @@ services:
       - "44582:6246"	# "TCP	Maintainerr - Web UI accessible at the assigned port"
     devices:
       - /dev/fuse:/dev/fuse:rwm
+      
       - /dev/dri:/dev/dri       
     cap_add:
       - SYS_ADMIN
     security_opt:
       - apparmor:unconfined
       - no-new-privileges
+    group_add:
+      - "44"   # video
+      - "992"  # render

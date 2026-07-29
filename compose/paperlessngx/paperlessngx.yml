@@ -66,10 +66,10 @@ services:
       - $APPDIR/paperlessngx/media:/usr/src/paperless/media
       - $APPDIR/paperlessngx/export:/usr/src/paperless/export
       - $APPDIR/paperlessngx/consume:/usr/src/paperless/consume
-    env_file: docker-compose.env
     environment:
       PAPERLESS_REDIS: redis://broker:6379
       PAPERLESS_DBHOST: paperless_db
+      PAPERLESS_SECRET_KEY: $PAPERLESS_SECRET_KEY
 
 volumes:
   data:
