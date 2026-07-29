@@ -28,10 +28,5 @@ rsync -a --info=progress2 \
   "$TMP_DIR/appdata/" appdata/
 
 echo ""
-echo "Restore complete!"
-
-read -r -p "Start the stack now? [Y/n] " reply
-case "$reply" in
-  [nN]|[nN][oO]) echo "Run 'docker compose up -d' later to start." ;;
-  *) echo "Starting stack..." && docker compose up -d ;;
-esac
+echo "Restore complete! Starting stack..."
+docker compose up -d

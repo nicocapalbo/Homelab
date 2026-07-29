@@ -33,8 +33,9 @@ Secrets and service configs are stored in a [private config overlay](https://git
 git clone git@github.com:nicocapalbo/Homelab.git
 cd Homelab
 bash restore.sh
-docker compose up -d
 ```
+
+This clones the private config overlay, copies `.env`, syncs `appdata/` configs, and automatically starts the stack.
 
 ### Sync config changes back
 
