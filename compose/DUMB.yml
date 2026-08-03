@@ -1,7 +1,7 @@
 services:
   DUMB:
     container_name: DUMB
-    image: iampuid0/dumb:dev                                       ## Optionally, specify a specific version of DUMB w/ image: iampuid0/dumb:2.0.0
+    image: iampuid0/dumb:latest                                       ## Optionally, specify a specific version of DUMB w/ image: iampuid0/dumb:2.0.0
     stop_grace_period: 30s                                            ## Adjust as need to allow for graceful shutdown of the container
     shm_size: 128mb                                                   ## Increased for PostgreSQL
     stdin_open: true                                                  ## docker run -i
