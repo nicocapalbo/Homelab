@@ -79,6 +79,7 @@ include:
   - compose/uptime-kuma.yml
   - compose/netdata.yml
   - compose/beszel.yml
+  - compose/whatsapp-playtomic-importer.yml
 
   #DEV
   # - compose/DMBDev.yml

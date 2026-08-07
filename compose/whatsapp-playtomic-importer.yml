@@ -1,0 +1,17 @@
+services:
+  whatsapp-playtomic-importer:
+    image: ghcr.io/nicocapalbo/whatsapp-playtomic-importer:latest
+    container_name: whatsapp-playtomic-importer
+    restart: unless-stopped
+    networks:
+      - apps
+    environment:
+      WHATSAPP_ALLOWED_CHAT_IDS: ${WHATSAPP_ALLOWED_CHAT_IDS}
+      PLAYTOMICDB_BASE_URL: ${PLAYTOMICDB_BASE_URL}
+      PLAYTOMICDB_ADMIN_TOKEN: ${PLAYTOMICDB_ADMIN_TOKEN}
+      STORE_PATH: "/app/data/store.json"
+      AUTH_DIR: "/app/data/auth"
+      LOG_LEVEL: "info"
+      DRY_RUN: "true"
+    volumes:
+      - $APPDIR/wp-playtomic/data:/app/data
