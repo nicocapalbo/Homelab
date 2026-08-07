@@ -12,6 +12,6 @@ services:
       STORE_PATH: "/app/data/store.json"
       AUTH_DIR: "/app/data/auth"
       LOG_LEVEL: "info"
-      DRY_RUN: "true"
+      DRY_RUN: "false"
     volumes:
       - $APPDIR/wp-playtomic/data:/app/data
