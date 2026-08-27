@@ -10,6 +10,9 @@ services:
       - PGID=0
       - TZ=$TZ
       # - CLI_ARGS= #optional
+      - DUPLICATI__ALLOW_INSECURE_DATAFOLDER=true
+      - SETTINGS_ENCRYPTION_KEY=$DUPLICATI_SETTINGS_KEY
+      - DUPLICATI__WEBSERVICE_PASSWORD=$DUPLICATI_WEBSERVICE_PASSWORD
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - $APPDIR/duplicati:/config
