@@ -49,6 +49,7 @@ include:
   - compose/homepage.yml
   - compose/dozzle.yml
   - compose/pihole.yml
+  - compose/hermes.yml
 
   # BACKUPS
   - compose/duplicati.yml

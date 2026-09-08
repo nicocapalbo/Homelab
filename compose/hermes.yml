@@ -1,0 +1,34 @@
+services:
+  hermes:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes
+    restart: unless-stopped
+    command: gateway run
+    networks:
+      - apps
+      - admin
+    ports:
+      - "9119:9119"   # Dashboard
+    volumes:
+      - $APPDIR/hermes:/opt/data
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/nico/docker:/host/docker
+    environment:
+      - TZ=$TZ
+      - PUID=$PUID
+      - PGID=$PGID
+      - HERMES_DASHBOARD=1
+      - HERMES_DASHBOARD_BASIC_AUTH_USERNAME=$HERMES_DASHBOARD_USERNAME
+      - HERMES_DASHBOARD_BASIC_AUTH_PASSWORD=$HERMES_DASHBOARD_PASSWORD
+      - HERMES_DASHBOARD_BASIC_AUTH_SECRET=$HERMES_DASHBOARD_SECRET
+      - DISCORD_BOT_TOKEN=$DISCORD_BOT_TOKEN
+      - DISCORD_ALLOWED_USERS=$DISCORD_ALLOWED_USERS
+      - WHATSAPP_ENABLED=true
+      - WHATSAPP_MODE=self-chat
+      - WHATSAPP_ALLOWED_USERS=$WHATSAPP_ALLOWED_USERS
+      - OPENROUTER_API_KEY=$OPENROUTER_API_KEY
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+          cpus: "2.0"
