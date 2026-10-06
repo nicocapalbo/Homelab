@@ -6,17 +6,19 @@ if [ "${HOOK_SYNCING:-0}" = "1" ]; then
   exit 0
 fi
 
-# Only check if pushing to origin/master
+# pre-push args: $1 = remote name, $2 = remote url
 readonly REMOTE="origin"
-readonly BRANCH="master"
-if [ "$1" = "$REMOTE" ] && [ "$2" = "refs/heads/$BRANCH" ]; then
-  # Check if .env or appdata/ changed since last commit
-  if ! git diff --quiet -- .env appdata/ 2>/dev/null; then
-    echo ""
-    echo "============================================"
-    echo " Unsynced config changes detected!"
-    echo " Running sync-private.sh..."
-    echo "============================================"
-    HOOK_SYNCING=1 bash "$(git rev-parse --show-toplevel)/sync-private.sh"
-  fi
+if [ "$1" != "$REMOTE" ]; then
+  exit 0
+fi
+
+# Sync if .env or anything in appdata/ is newer than the last successful sync
+STAMP="$(git rev-parse --absolute-git-dir)/last-sync"
+if [ ! -f "$STAMP" ] || [ -n "$(find .env appdata -newer "$STAMP" -print -quit 2>/dev/null)" ]; then
+  echo ""
+  echo "============================================"
+  echo " Unsynced config changes detected!"
+  echo " Running sync-private.sh..."
+  echo "============================================"
+  HOOK_SYNCING=1 bash "$(git rev-parse --show-toplevel)/sync-private.sh"
 fi
