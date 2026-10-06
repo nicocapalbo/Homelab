@@ -78,7 +78,7 @@ include:
   - compose/diun.yml
   # - compose/tandoor/tandoor.yml
   - compose/uptime-kuma.yml
-  - compose/netdata.yml
+  # - compose/netdata.yml
   - compose/beszel.yml
   # - compose/whatsapp-playtomic-importer.yml
 
